@@ -7,9 +7,7 @@
         <version>2.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.taroco.oauth2</groupId>
-    <artifactId>authentication</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>taroco-authentication</artifactId>
     <packaging>jar</packaging>
     <name>Taroco-Authentication</name>
     <description>Taroco 认证中心</description>
