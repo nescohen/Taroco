@@ -1,5 +1,6 @@
 package cn.taroco.oauth2.authentication.entity;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
@@ -28,6 +29,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return PREFIX + role.toUpperCase();
+
+        return StrUtil.addPrefixIfNot(role.toUpperCase(), PREFIX);
     }
 }

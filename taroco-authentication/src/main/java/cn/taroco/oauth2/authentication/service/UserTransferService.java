@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * 模拟 UserService 实现查询用户
@@ -79,12 +77,9 @@ public class UserTransferService {
 
         final List<SysRole> roleList = userVO.getRoleList();
         if (CollUtil.isNotEmpty(roleList)) {
-            final Set<String> permissions = userVO.getPermissions();
             final List<Role> roles = new ArrayList<>(roleList.size());
             roleList.forEach(item -> roles.add(new Role(item.getRoleCode(), Collections.emptyList())));
-            if (CollUtil.isNotEmpty(permissions)) {
-                roles.get(0).setOperations(permissions.stream().map(Operation::new).collect(Collectors.toList()));
-            }
+            user.setRoles(roles);
         } else {
             user.setRoles(Collections.singletonList(defaultRole()));
         }
