@@ -67,11 +67,11 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 更新指定用户信息
      *
-     * @param userDto  用户信息
+     * @param sysUser  用户信息
      * @param username 用户信息
      * @return
      */
-    Boolean updateUser(UserDTO userDto, String username);
+    Boolean updateUser(SysUser sysUser, String username);
 
     /**
      * 通过手机号查询用户信息

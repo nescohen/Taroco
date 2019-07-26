@@ -196,9 +196,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public Boolean updateUser(UserDTO userDto, String username) {
-        SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(userDto, sysUser);
+    public Boolean updateUser(SysUser sysUser, String username) {
         sysUser.setUpdateTime(new Date());
         this.updateById(sysUser);
         return Boolean.TRUE;

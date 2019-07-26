@@ -75,14 +75,14 @@ public class UserController extends BaseController {
     /**
      * 更新用户信息
      *
-     * @param userDto 用户信息
+     * @param sysUser 用户信息
      * @return R
      */
     @PutMapping
     @RequireRole(RoleConst.ADMIN)
-    public Response userUpdate(@Valid @RequestBody UserDTO userDto) {
-        SysUser user = userService.getById(userDto.getUserId());
-        return Response.success(userService.updateUser(userDto, user.getUsername()));
+    public Response userUpdate(@Valid @RequestBody SysUser sysUser) {
+        SysUser user = userService.getById(sysUser.getUserId());
+        return Response.success(userService.updateUser(sysUser, user.getUsername()));
     }
 
     /**

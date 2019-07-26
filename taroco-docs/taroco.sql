@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 本机root
-Source Server Version : 50716
+Source Server Version : 80016
 Source Host           : localhost:3306
 Source Database       : taroco
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-05-17 16:32:49
+Date: 2019-07-26 17:10:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -139,35 +139,10 @@ INSERT INTO `sys_menu` VALUES ('6', '字典管理', 'dict', null, '1', 'list-alt
 INSERT INTO `sys_menu` VALUES ('7', '部门管理', 'dept', null, '1', 'codepen', '7', '2018-01-20 13:17:19', '2018-09-08 02:01:49', '0');
 INSERT INTO `sys_menu` VALUES ('8', '服务管理', '/taroco-admin', null, '-1', 'line-chart', '8', '2018-01-22 12:30:41', '2019-02-13 10:54:32', '0');
 INSERT INTO `sys_menu` VALUES ('14', '接口文档', 'taroco-api', '', '8', 'buysellads', '2', '2018-01-23 10:56:43', '2018-09-10 06:58:57', '0');
-INSERT INTO `sys_menu` VALUES ('100', '客户端管理', 'client', '', '1', 'share-alt', '9', '2018-01-20 13:17:19', '2018-09-08 02:02:02', '0');
 INSERT INTO `sys_menu` VALUES ('110', '路由管理', 'route', null, '1', 'object-ungroup', '8', '2018-05-15 21:44:51', '2018-09-08 02:02:07', '0');
 INSERT INTO `sys_menu` VALUES ('111', '权限管理', 'auth', null, '1', 'universal-access', '5', '2019-04-12 16:45:54', '2019-04-12 16:47:58', '0');
 INSERT INTO `sys_menu` VALUES ('112', '服务治理', 'taroco-governance', null, '8', 'line-chart', '1', '2019-04-12 16:45:54', '2019-04-12 16:47:58', '0');
 INSERT INTO `sys_menu` VALUES ('113', 'Sentinel 控制台', 'taroco-sentinel', null, '8', 'codiepie', '3', '2019-05-17 16:24:06', '2019-05-17 16:24:16', '0');
-
--- ----------------------------
--- Table structure for sys_oauth_client_details
--- ----------------------------
-DROP TABLE IF EXISTS `sys_oauth_client_details`;
-CREATE TABLE `sys_oauth_client_details` (
-  `client_id` varchar(40) NOT NULL,
-  `resource_ids` varchar(256) DEFAULT NULL,
-  `client_secret` varchar(256) DEFAULT NULL,
-  `scope` varchar(256) DEFAULT NULL,
-  `authorized_grant_types` varchar(256) DEFAULT NULL,
-  `web_server_redirect_uri` varchar(256) DEFAULT NULL,
-  `authorities` varchar(256) DEFAULT NULL,
-  `access_token_validity` int(11) DEFAULT NULL,
-  `refresh_token_validity` int(11) DEFAULT NULL,
-  `additional_information` varchar(4096) DEFAULT NULL,
-  `autoapprove` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of sys_oauth_client_details
--- ----------------------------
-INSERT INTO `sys_oauth_client_details` VALUES ('taroco', null, '$2a$10$drYsSntNKIr.cCiAQip0uOp5VtZl2FWZ4WvNYgLcMb19ri66mVzRS', 'server', 'password,refresh_token,authorization_code', '', null, null, null, null, 'true');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -196,12 +171,12 @@ INSERT INTO `sys_permission` VALUES ('1', '管理员权限', 'admin', '系统权
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(64) COLLATE utf8mb4_bin NOT NULL,
-  `role_code` varchar(64) COLLATE utf8mb4_bin NOT NULL,
-  `role_desc` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `role_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `role_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `role_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `del_flag` char(1) COLLATE utf8mb4_bin DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `role_idx1_role_code` (`role_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -220,12 +195,12 @@ CREATE TABLE `sys_role_dept` (
   `role_id` int(20) DEFAULT NULL COMMENT '角色ID',
   `dept_id` int(20) DEFAULT NULL COMMENT '部门ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
-INSERT INTO `sys_role_dept` VALUES ('1', '1', '11');
+INSERT INTO `sys_role_dept` VALUES ('29', '1', '11');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -249,7 +224,6 @@ INSERT INTO `sys_role_menu` VALUES ('1', '6');
 INSERT INTO `sys_role_menu` VALUES ('1', '7');
 INSERT INTO `sys_role_menu` VALUES ('1', '8');
 INSERT INTO `sys_role_menu` VALUES ('1', '14');
-INSERT INTO `sys_role_menu` VALUES ('1', '100');
 INSERT INTO `sys_role_menu` VALUES ('1', '110');
 INSERT INTO `sys_role_menu` VALUES ('1', '111');
 INSERT INTO `sys_role_menu` VALUES ('1', '112');
@@ -264,11 +238,12 @@ CREATE TABLE `sys_role_permission` (
   `role_id` int(11) NOT NULL COMMENT '角色ID',
   `permission_id` int(11) NOT NULL COMMENT '权限ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_role_permission
 -- ----------------------------
+INSERT INTO `sys_role_permission` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for sys_route
@@ -287,7 +262,7 @@ CREATE TABLE `sys_route` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `del_flag` char(1) DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='动态路由配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='动态路由配置表';
 
 -- ----------------------------
 -- Records of sys_route
@@ -301,25 +276,26 @@ INSERT INTO `sys_route` VALUES ('5', '/auth/**', 'taroco-authentication-server',
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `username` varchar(64) COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
-  `password` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `salt` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '随机盐',
-  `phone` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '简介',
-  `avatar` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
-  `label` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '随机盐',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '简介',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `dept_id` int(11) DEFAULT NULL COMMENT '部门ID',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `del_flag` char(1) COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0-正常，1-删除',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0-正常，1-删除',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_idx1_username` (`username`) USING BTREE,
   UNIQUE KEY `user_idx2_phone` (`phone`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '$2a$10$vg5QNHhCknAqevx9vM2s5esllJEzF/pa8VZXtFYHhhOhUcCw/GWyS', null, '17034642111', null, 'admin', '11', '2018-04-20 07:15:18', '2019-04-24 11:14:14', '0');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '$2a$10$vg5QNHhCknAqevx9vM2s5esllJEzF/pa8VZXtFYHhhOhUcCw/GWyS', null, '17034642111', null, 'admin', '11', '2018-04-20 07:15:18', '2019-07-26 16:28:29', '0');
+INSERT INTO `sys_user` VALUES ('3', 'add', '$2a$10$1n06DxtbUIFgml3YN5u7.e0csgbEJhe.Tkk9mM9kmR7zbvnStKaCG', null, '18181956331', null, null, '12', '2019-07-26 16:24:52', '2019-07-26 16:28:36', '1');
 
 -- ----------------------------
 -- Table structure for sys_user_role
