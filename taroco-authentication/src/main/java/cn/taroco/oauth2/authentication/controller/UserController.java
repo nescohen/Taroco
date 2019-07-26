@@ -4,7 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.taroco.oauth2.authentication.consts.CacheConstants;
 import cn.taroco.oauth2.authentication.mvc.response.Response;
 import cn.taroco.oauth2.authentication.config.redis.TarocoRedisRepository;
-import cn.taroco.oauth2.authentication.service.MockUserService;
+import cn.taroco.oauth2.authentication.service.UserTransferService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class UserController {
     private TarocoRedisRepository redisRepository;
 
     @Autowired
-    private MockUserService userService;
+    private UserTransferService userTransferService;
 
     /**
      * 查询登录用户
@@ -66,7 +66,7 @@ public class UserController {
             log.error("用户:{}验证码未失效{}", mobile, tempCode);
             return ResponseEntity.ok(Response.failure("验证码: " + tempCode + " 未失效，请失效后再次申请"));
         }
-        if (userService.findUserByMobile(mobile) == null) {
+        if (userTransferService.findUserByMobile(mobile) == null) {
             log.error("根据用户手机号:{}, 查询用户为空", mobile);
             return ResponseEntity.ok(Response.failure("手机号不存在"));
         }

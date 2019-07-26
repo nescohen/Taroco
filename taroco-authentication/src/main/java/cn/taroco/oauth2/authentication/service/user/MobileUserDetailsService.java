@@ -1,7 +1,7 @@
 package cn.taroco.oauth2.authentication.service.user;
 
 import cn.taroco.oauth2.authentication.entity.User;
-import cn.taroco.oauth2.authentication.service.MockUserService;
+import cn.taroco.oauth2.authentication.service.UserTransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 public class MobileUserDetailsService extends AbstractUserDetailService {
 
     @Autowired
-    private MockUserService mockUserService;
+    private UserTransferService userTransferService;
 
     @Override
     protected User getUserVO(final String username) {
-        final User user = mockUserService.findUserByMobile(username);
+        final User user = userTransferService.findUserByMobile(username);
         if (user == null) {
             throw new InternalAuthenticationServiceException("手机号: " + username + ", 不存在");
         }

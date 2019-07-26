@@ -40,7 +40,6 @@
         <springfox.version>2.8.0</springfox.version>
         <httpclient.version>4.5.5</httpclient.version>
         <mybatis-plus.version>3.0.7.1</mybatis-plus.version>
-        <mysql.version>5.1.21</mysql.version>
         <fastjson.version>1.2.50</fastjson.version>
         <zxing.version>3.2.0</zxing.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
@@ -223,12 +222,6 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.version}</version>
             </dependency>
-            <!-- mysql -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>
             <!-- alibaba JSON类库 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -269,21 +262,6 @@
                 <groupId>com.marcosbarbero.cloud</groupId>
                 <artifactId>spring-cloud-zuul-ratelimit</artifactId>
                 <version>${spring-cloud-zuul-ratelimit.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>Semantic-UI</artifactId>
-                <version>2.4.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>jquery</artifactId>
-                <version>3.4.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>webjars-locator</artifactId>
-                <version>0.36</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

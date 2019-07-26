@@ -9,6 +9,7 @@ import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -20,6 +21,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * 2019/7/2 16:11
  */
 @EnableJwtToken
+@EnableFeignClients
 @EnableDiscoveryClient
 @EnableRedisHttpSession(redisNamespace = CacheConstants.REDIS_SESSION_PREFIX)
 @SpringBootApplication

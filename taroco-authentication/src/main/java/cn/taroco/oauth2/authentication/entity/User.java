@@ -31,6 +31,11 @@ public class User implements Serializable, UserDetails {
     private Integer userId;
 
     /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
      * 用户名
      */
     private String username;
@@ -39,6 +44,16 @@ public class User implements Serializable, UserDetails {
      * 密码
      */
     private String password;
+
+    /**
+     * 部门ID
+     */
+    private Integer deptId;
+
+    /**
+     * 部门名称
+     */
+    private String deptName;
 
     /**
      * 是否过期
