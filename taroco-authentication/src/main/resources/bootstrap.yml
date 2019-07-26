@@ -1,9 +1,9 @@
 server:
-  port: 9002
+  port: 9001
 
 spring:
   application:
-    name: taroco-service-governance
+    name: taroco-authentication-server
   profiles:
     active: dev
 
@@ -34,3 +34,4 @@ spring:
         file-extension: yml
         shared-dataids: application-${spring.profiles}.yml
         namespace: 282b0efc-75d8-488e-8c29-3037a06f64ed
+
