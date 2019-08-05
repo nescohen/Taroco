@@ -1,6 +1,6 @@
 package cn.taroco.common.redis.template;
 
-import com.xiaoleilu.hutool.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisClusterNode;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -243,7 +243,7 @@ public class TarocoRedisRepository {
             RedisSerializer<String> serializer = getRedisSerializer();
             Map<String, String> maps = new HashMap<>(16);
             Set<String> keys = redisTemplate.keys(keyPatten + "*");
-            if (CollectionUtil.isNotEmpty(keys)) {
+            if (CollUtil.isNotEmpty(keys)) {
                 for (String key : keys) {
                     byte[] bKeys = serializer.serialize(key);
                     byte[] bValues = connection.get(bKeys);

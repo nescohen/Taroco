@@ -5,7 +5,7 @@ import cn.taroco.common.web.Response;
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.xiaoleilu.hutool.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;

@@ -1,12 +1,12 @@
 package cn.taroco.gateway.zuul.filter.pre;
 
+import cn.hutool.core.util.StrUtil;
 import cn.taroco.common.constants.LogType;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.entity.SysLog;
 import cn.taroco.gateway.zuul.feign.SysLogService;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.xiaoleilu.hutool.util.StrUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

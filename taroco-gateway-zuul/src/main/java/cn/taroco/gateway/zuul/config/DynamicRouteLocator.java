@@ -1,11 +1,11 @@
 package cn.taroco.gateway.zuul.config;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.taroco.common.constants.CacheConstants;
 import cn.taroco.common.entity.SysRoute;
 import cn.taroco.common.redis.template.TarocoRedisRepository;
 import com.alibaba.fastjson.JSONArray;
-import com.xiaoleilu.hutool.collection.CollUtil;
-import com.xiaoleilu.hutool.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

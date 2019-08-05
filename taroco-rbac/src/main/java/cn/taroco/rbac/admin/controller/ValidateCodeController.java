@@ -1,9 +1,9 @@
 package cn.taroco.rbac.admin.controller;
 
+import cn.hutool.core.lang.Assert;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.google.code.kaptcha.Producer;
-import com.xiaoleilu.hutool.lang.Assert;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
