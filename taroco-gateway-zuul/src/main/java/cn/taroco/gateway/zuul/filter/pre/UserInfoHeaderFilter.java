@@ -1,9 +1,9 @@
 package cn.taroco.gateway.zuul.filter.pre;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.taroco.common.constants.SecurityConstants;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.xiaoleilu.hutool.collection.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.core.Authentication;
@@ -56,7 +56,7 @@ public class UserInfoHeaderFilter extends ZuulFilter {
         if (authentication != null) {
             RequestContext requestContext = RequestContext.getCurrentContext();
             requestContext.addZuulRequestHeader(SecurityConstants.USER_HEADER, authentication.getName());
-            requestContext.addZuulRequestHeader(SecurityConstants.USER_ROLE_HEADER, CollectionUtil.join(authentication.getAuthorities(), ","));
+            requestContext.addZuulRequestHeader(SecurityConstants.USER_ROLE_HEADER, CollUtil.join(authentication.getAuthorities(), ","));
             String tokenValue = extractToken(request);
             if (!StringUtils.isEmpty(tokenValue)) {
                 OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);

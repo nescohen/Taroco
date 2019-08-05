@@ -1,5 +1,6 @@
 package cn.taroco.gateway.zuul.filter.pre;
 
+import cn.hutool.core.util.StrUtil;
 import cn.taroco.common.constants.CacheConstants;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.exception.ValidateCodeException;
@@ -8,7 +9,6 @@ import cn.taroco.common.utils.JsonUtils;
 import cn.taroco.common.web.Response;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.xiaoleilu.hutool.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

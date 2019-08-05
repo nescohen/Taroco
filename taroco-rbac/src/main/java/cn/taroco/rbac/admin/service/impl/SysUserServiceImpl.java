@@ -1,5 +1,6 @@
 package cn.taroco.rbac.admin.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.taroco.common.constants.CacheConstants;
 import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.constants.SecurityConstants;
@@ -17,7 +18,6 @@ import cn.taroco.rbac.admin.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xiaoleilu.hutool.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
