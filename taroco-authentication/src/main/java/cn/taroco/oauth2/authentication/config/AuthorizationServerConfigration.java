@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -147,8 +148,12 @@ public class AuthorizationServerConfigration extends AuthorizationServerConfigur
     @Bean
     public TokenEnhancer tokenEnhancer() {
         return (accessToken, authentication) -> {
+            final Authentication userAuthentication = authentication.getUserAuthentication();
+            if (userAuthentication == null) {
+                return accessToken;
+            }
             Map<String, Object> additionalInfo = new LinkedHashMap<>(accessToken.getAdditionalInformation());
-            final Object principal = authentication.getUserAuthentication().getPrincipal();
+            final Object principal = userAuthentication.getPrincipal();
             User user;
             if (principal instanceof User) {
                 user = (User) principal;
