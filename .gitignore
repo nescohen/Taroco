@@ -26,3 +26,7 @@ nbdist/
 ### Taroco
 logs
 LOG_FILE_IS_UNDEFINED
+/jars/nacos/logs
+/jars/nacos/data
+/jars/nacos/bin/logs
+/jars/nacos/bin/work
