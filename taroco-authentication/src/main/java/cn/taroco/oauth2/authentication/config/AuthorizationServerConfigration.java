@@ -87,7 +87,7 @@ public class AuthorizationServerConfigration extends AuthorizationServerConfigur
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetailsService());
+        clients.withClientDetails(clientDetails());
     }
 
     /**
@@ -126,7 +126,7 @@ public class AuthorizationServerConfigration extends AuthorizationServerConfigur
     @Bean
     @Lazy
     @Scope(proxyMode = ScopedProxyMode.INTERFACES)
-    public ClientDetailsService clientDetailsService() {
+    public ClientDetailsService clientDetails() {
         return new CustomClientDetailsService(CacheConstants.REDIS_CLIENTS_PREFIX, dataSource, redisRepository, objectMapper);
     }
 
@@ -177,7 +177,7 @@ public class AuthorizationServerConfigration extends AuthorizationServerConfigur
         defaultTokenServices.setTokenStore(tokenStore);
         defaultTokenServices.setAccessTokenValiditySeconds(oauth2Properties.getAccessTokenValiditySeconds());
         defaultTokenServices.setRefreshTokenValiditySeconds(oauth2Properties.getRefreshTokenValiditySeconds());
-        defaultTokenServices.setClientDetailsService(clientDetailsService());
+        defaultTokenServices.setClientDetailsService(clientDetails());
 
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         if (jwtAccessTokenConverter != null) {

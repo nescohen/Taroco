@@ -1,15 +1,10 @@
 package cn.taroco.common.redis.limit;
 
-import cn.taroco.common.redis.constant.RedisToolsConstant;
 import cn.taroco.common.redis.util.LimitScriptUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.connection.RedisClusterConnection;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 
-import java.io.IOException;
 import java.util.Collections;
 
 /**
@@ -21,9 +16,8 @@ import java.util.Collections;
 @Slf4j
 public class RedisLimit {
 
-    private JedisConnectionFactory jedisConnectionFactory;
-    private int type;
-    private int limit = 200;
+    private final StringRedisTemplate redisTemplate;
+    private final int limit;
     private static final int FAIL_CODE = 0;
 
     /**
@@ -33,8 +27,7 @@ public class RedisLimit {
 
     private RedisLimit(Builder builder) {
         this.limit = builder.limit;
-        this.jedisConnectionFactory = builder.jedisConnectionFactory;
-        this.type = builder.type;
+        this.redisTemplate = builder.redisTemplate;
         buildScript();
     }
 
@@ -46,43 +39,16 @@ public class RedisLimit {
      */
     public boolean limit() {
 
-        //get connection
-        Object connection = getConnection();
-
-        Object result = limitRequest(connection);
+        Object result = limitRequest();
 
         return FAIL_CODE != (Long) result;
     }
 
-    private Object limitRequest(Object connection) {
-        Object result;
+    private Object limitRequest() {
         String key = String.valueOf(System.currentTimeMillis() / 1000);
-        if (connection instanceof Jedis) {
-            result = ((Jedis) connection).eval(script, Collections.singletonList(key), Collections.singletonList(String.valueOf(limit)));
-            ((Jedis) connection).close();
-        } else {
-            result = ((JedisCluster) connection).eval(script, Collections.singletonList(key), Collections.singletonList(String.valueOf(limit)));
-            try {
-                ((JedisCluster) connection).close();
-            } catch (IOException e) {
-                log.error("limit IOException", e);
-            }
-        }
-        return result;
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
+        return redisTemplate.execute(redisScript, Collections.singletonList(key), Collections.singletonList(String.valueOf(limit)));
     }
-
-    private Object getConnection() {
-        Object connection;
-        if (type == RedisToolsConstant.SINGLE) {
-            RedisConnection redisConnection = jedisConnectionFactory.getConnection();
-            connection = redisConnection.getNativeConnection();
-        } else {
-            RedisClusterConnection clusterConnection = jedisConnectionFactory.getClusterConnection();
-            connection = clusterConnection.getNativeConnection();
-        }
-        return connection;
-    }
-
 
     /**
      * read lua script
@@ -96,15 +62,12 @@ public class RedisLimit {
      * the builder
      */
     public static class Builder {
-        private JedisConnectionFactory jedisConnectionFactory = null;
+        private final StringRedisTemplate redisTemplate;
 
         private int limit = 200;
-        private int type;
 
-
-        public Builder(JedisConnectionFactory jedisConnectionFactory, int type) {
-            this.jedisConnectionFactory = jedisConnectionFactory;
-            this.type = type;
+        public Builder(StringRedisTemplate redisTemplate) {
+            this.redisTemplate = redisTemplate;
         }
 
         public Builder limit(int limit) {
