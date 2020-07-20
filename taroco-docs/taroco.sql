@@ -289,13 +289,12 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_idx1_username` (`username`) USING BTREE,
   UNIQUE KEY `user_idx2_phone` (`phone`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '$2a$10$vg5QNHhCknAqevx9vM2s5esllJEzF/pa8VZXtFYHhhOhUcCw/GWyS', null, '17034642111', null, 'admin', '11', '2018-04-20 07:15:18', '2019-07-26 16:28:29', '0');
-INSERT INTO `sys_user` VALUES ('3', 'add', '$2a$10$1n06DxtbUIFgml3YN5u7.e0csgbEJhe.Tkk9mM9kmR7zbvnStKaCG', null, '18181956331', null, null, '12', '2019-07-26 16:24:52', '2019-07-26 16:28:36', '1');
 
 -- ----------------------------
 -- Table structure for sys_user_role
