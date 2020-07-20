@@ -1,7 +1,7 @@
 package cn.taroco.common.redis.limit.intercept;
 
 import cn.taroco.common.redis.limit.RedisLimit;
-import cn.taroco.common.redis.limit.annotation.SpringControllerLimit;
+import cn.taroco.common.redis.limit.annotation.RequestLimit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -33,7 +33,7 @@ public class SpringMvcIntercept extends HandlerInterceptorAdapter {
         }
         if (handler instanceof HandlerMethod) {
             HandlerMethod method = (HandlerMethod) handler;
-            SpringControllerLimit annotation = method.getMethodAnnotation(SpringControllerLimit.class);
+            RequestLimit annotation = method.getMethodAnnotation(RequestLimit.class);
             if (annotation == null) {
                 //skip
                 return true;

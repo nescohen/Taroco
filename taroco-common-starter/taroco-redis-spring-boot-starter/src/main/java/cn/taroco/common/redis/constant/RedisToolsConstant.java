@@ -9,12 +9,7 @@ package cn.taroco.common.redis.constant;
 public class RedisToolsConstant {
 
     /**
-     * single Redis
+     * 分布式锁 key的前缀
      */
-    public final static int SINGLE = 1 ;
-
-    /**
-     * Redis cluster
-     */
-    public final static int CLUSTER = 2 ;
+    public final static String DISTRIBUTE_LOCK_PREFIX = "taroco:lock";
 }
