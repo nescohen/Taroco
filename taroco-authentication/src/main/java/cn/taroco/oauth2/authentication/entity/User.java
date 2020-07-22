@@ -96,11 +96,11 @@ public class User implements Serializable, UserDetails {
             return Collections.emptyList();
         }
         final List<GrantedAuthority> authorities = new ArrayList<>(AuthorityUtils.createAuthorityList(
-                roles.stream().map(Role::getAuthority).collect(Collectors.joining())));
+                roles.stream().map(Role::getAuthority).collect(Collectors.joining(","))));
         roles.forEach(role -> {
             if (CollUtil.isNotEmpty(role.getOperations())) {
                 authorities.addAll(AuthorityUtils.createAuthorityList(
-                        role.getOperations().stream().map(Operation::getAuthority).collect(Collectors.joining())));
+                        role.getOperations().stream().map(Operation::getAuthority).collect(Collectors.joining(","))));
             }
         });
         return authorities;
